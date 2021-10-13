@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<sc>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //alert("esto es un proceso sincronico") // BLOQUEANTE
+
+        // console.log('Primer Console.log')
+        // setTimeout(function() {
+        //     console.log('Hola Mundo al cabo de 3 segundos')
+        // }, 3000)
+        // console.log('Tercer Console.log')
+
+        // Una promesa es una OPERACION ASINCRONICA QUE PUEDE SER RESUELTA O RECHAZADA
+
+        // Tarea #1: Crear la promesa : definir cuando esta reuselta o rechazada
+        
+        const promesa = new Promise(function( resolver, rechazar){
+            let temperatura = 23
+            if(temperatura < 10){
+                //Todo OK
+                resolver('TODO OK')
+            }else{
+                //Error
+               rechazar('Errores en promesa')
+            }
+        })
+
+        // //Tarea #2: Usar la promesa: Definir que sucede cuando esta resuelta o rechazada
+
+        // promesa
+        //  .then(function(mensaje) {
+        //      document.write(mensaje)
+        //  })
+        //  .catch(function(error) {
+        //     console.log(error)
+        //  })
+
+
+
+
+        // Async - await
+        // 1) ejecuta la promesa
+        // 2) Espera (await) a que la promesa se resuelva
+        // 3) Cuando la promesa se resuelve, await devuelve el argumento de la funcion resolver
+
+        async function mifuncion() {
+            try {
+                const mensaje = await promesa
+                console.log(mensaje)
+            }catch(error) {
+                console.log("error!!!:", error)
+            }
+
+        }
+        //mifuncion()
+
+        /* API FETCH
+            en que ambito esta disponible?
+
+            - window (browser)
+            - serviceWorker (worker)
+
+            que nos ofrece?
+
+            - Funciones: fech()
+            - Eventos: FetchEvent
+            - Objetos: Request y Response
+        */
+
+        // let peticionesHttp = new Request('https://jsonplaceholder.typicode.com/users')
+        // console.log(peticionesHttp)
+
+        (async function() {
+            const respuesta = await fetch('https://jsonplaceholder.typicode.com/users')
+            const datos = await respuesta.json()
+
+            console.log(datos)
+        })()
+    </script>
+</body>
+</html>
