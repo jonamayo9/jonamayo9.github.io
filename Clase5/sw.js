@@ -3,6 +3,7 @@
 // Fetch: se ejecuta al interceptar una peticion saliente
 // operador sefl: es una referencia al objeto -> SW
 self.addEventListener('fetch', e => {
+    //console.log(e)
 
 })
 
